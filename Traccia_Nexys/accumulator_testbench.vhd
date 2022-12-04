@@ -1,21 +1,21 @@
 ----------------------------------------------------------------------------------
--- Company:
--- Engineer:
---
+-- Company: 
+-- Engineer: 
+-- 
 -- Create Date: 04/25/2020 04:57:11 PM
--- Design Name:
+-- Design Name: 
 -- Module Name: accumulator_testbench - Behavioral
--- Project Name:
--- Target Devices:
--- Tool Versions:
--- Description:
---
--- Dependencies:
---
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
---
+-- 
 ----------------------------------------------------------------------------------
 
 
@@ -69,7 +69,7 @@ begin
 
  uut_test_proc : process
  begin
-
+    
     reset <= '0';
     wait for 20 ns;
     reset <= '1';
