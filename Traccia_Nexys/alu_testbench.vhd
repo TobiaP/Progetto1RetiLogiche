@@ -31,40 +31,50 @@ begin
       subtract => subtract,
       multiply => multiply,
       divide   => divide,
-      r        => r
+      r        => r 
    );
 
     alu_test_proc : process
     begin
-
+    
      wait for 100 ns;
-
+    
      a <= "00000000000000000000000000000101"; -- 5
      b <= "00000000000000000000000000000010"; -- 2
-
+     
      wait for 10 ns;
-
+     
      add <= '1';
      wait for 10 ns;
      add <= '0';
      wait for 10 ns;
-
+     
      subtract <= '1';
      wait for 10 ns;
      subtract <= '0';
      wait for 10 ns;
-
+     
      multiply <= '1';
      wait for 10 ns;
      multiply <= '0';
      wait for 10 ns;
-
+     
      divide <= '1';
      wait for 10 ns;
      divide <= '0';
      wait for 10 ns;
-
+     
+    
     wait;
     end process;
 
 end Behavioral;
+
+
+
+
+
+
+
+
+
