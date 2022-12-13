@@ -48,21 +48,37 @@ begin
   up_detect : entity work.debouncer(Behavioral)
   port map (
     -- collega il bottone
+    clock => clock,
+    reset => reset,
+    bouncy => BTNU,
+    pulse => up_edge
   );
   
   down_detect : entity work.debouncer(Behavioral)
   port map (
     -- collega il bottone
+    clock   => clock,
+    reset   => reset,
+    bouncy  => BTND,
+    pulse   => down_edge
   );
   
   left_detect : entity work.debouncer(Behavioral)
   port map (
     -- collega il bottone
+    clock   => clock,
+    reset   => reset,
+    bouncy  => BTNL,
+    pulse   => left_edge
   );
 
   right_detect : entity work.debouncer(Behavioral)
   port map (
     -- collega il bottone
+    clock   => clock,
+    reset   => reset,
+    bouncy  => BTNR,
+    pulse   => right_edge
   );
   
   -- Instantiate the seven segment display driver
@@ -99,23 +115,35 @@ begin
   -- Instantiate the ALU
   the_alu : entity work.alu( Behavioral ) port map (
   -- Collega la alu all'accumulatore e agli switch. Collega inoltre i segnali interni per stabilire l'operazione
-
+  	a        => acc_out,
+    	b        => signed( sw_input ),
+    	add      => do_add,
+    	subtract => do_sub,
+   	multiply => do_mult,
+   	divide   => do_div,
+    	r        => acc_in
   );
   -- Assegna ai segnali interni l'uscita dei corrispettivi debouncer
   do_add  <= up_edge;
-  do_sub  <= ...
-  do_mult <= ...
-  do_div  <= ..
+  do_sub  <= left_edge;
+  do_mult <= right_edge;
+  do_div  <= down_edge;
    
   -- Dichiarazione accumulatore
   the_accumulator : entity work.accumulator( Behavioral )
   port map(
     -- Collega l'accumulatore
+    clock      => clock,
+    reset      => reset,
+    acc_init   => acc_init,
+    acc_enable => acc_enable,
+    acc_in     => acc_in,
+    acc_out    => acc_out
   );
   -- Assegna a display value il valore d'uscita
-  display_value <= std_logic_vector( ... );
+  display_value <= std_logic_vector( acc_out );
    -- Assegna acc_enable e acc_init come da consegna
-  acc_enable <= ...
-  acc_init <= ...;
+  acc_enable   <= up_edge or left_edge or right_edge or down_edge;
+  acc_init <= center_edge;
 
 end Behavioral;
